@@ -1,24 +1,31 @@
 import { useEffect, useState } from 'react'
 import './App.css'
-import { fabric } from "fabric";
+import Canvas from './CanvasComponent';
 
 
 function App() {
-  let [canvas,setCanvas] = useState('')
-  const initCanvas = () => (
-    new fabric.Canvas('canvas', {
-       height: 800,
-       width: 1300,
-       backgroundColor: 'pink'
-    })
- );
-  useEffect(()=>{
-setCanvas(initCanvas())
-},[canvas])
+  let [pointX,setPointX] = useState(0)
+  let [pointY,setPointY] = useState(0)
+  let [clicked,setClicked] = useState('false')
+  let [drag,setDrag] = useState('false')
+  let [resize, setResize] = useState('false')
+  let [scaling,setScaling] = useState('false')
+  let [rotating,setRotating] = useState('false')
   return (
-    <div className="App">
-     <h1 className='text-3xl font-bold'>Fabric.js Demo</h1>
-     <canvas id='canvas' className='canvas border border-1 border-black'></canvas>
+    <div className="App flex flex-col justify-center relative">
+     <div className='flex flex-col justify-between h-32 ml-2 absolute top-4 left-0 bg-white'>
+       <span>Fabric.js works!</span>
+       <span>Shape Clicked : {clicked}</span>
+       <span>Shape Dragged : {drag} </span>
+       <span>Shape Resized : {resize} </span>
+       <span>Shape Scaled : {scaling} </span>
+       <span>Shape Rotated : {rotating} </span>
+       <span>x-axis : {pointX}</span>
+       <span>y-axis : {pointY}</span>
+     </div>
+     <Canvas setPointX={setPointX} setPointY={setPointY} setClicked={setClicked} setDrag={setDrag}
+     setResize={setResize} setScaling={setScaling} setRotating={setRotating}
+     />
     </div>
   )
 }
